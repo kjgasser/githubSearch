@@ -1,5 +1,6 @@
 # Github Search
 
+> Check it out here: https://github-search-kelsey.herokuapp.com
 > This project gives a user the ability to make searches for Github users. I used React, Axios, and MDBootstrap React components to create this project.
 
 ![header of app](./src/images/header.png)
