@@ -8,7 +8,6 @@ import {
 } from "mdbreact";
 import pinkGradient from "../images/pink-gradient.png";
 import Githublogo from "../images/github-logo.png";
-import Searchbar from "./Searchbar.js";
 
 const Jumbotron = () => {
   return (

@@ -29,6 +29,7 @@ class Users extends Component {
     this.handlePagClick = this.handlePagClick.bind(this);
     this.handleNextClick = this.handleNextClick.bind(this);
     this.handlePreviousClick = this.handlePreviousClick.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   //triggers whenever the search button is clicked or enter is pressed
@@ -54,6 +55,12 @@ class Users extends Component {
   //sets the state of search input prior to submission
   changeHandler = event => {
     this.setState({ ...this.state, [event.target.name]: event.target.value });
+  };
+
+  handlePageChange = () => {
+    this.setState({
+      flipped: false
+    });
   };
 
   //clicking on a number in the pagination list
@@ -126,16 +133,12 @@ class Users extends Component {
       // Logic for displaying active results
       const indexOfLastResult = activePage * resultsPerPage;
       const indexOfFirstResult = indexOfLastResult - resultsPerPage;
-      const activeResults = results.slice(
-        indexOfFirstResult,
-        indexOfLastResult
-      );
-
-      const renderResults = activeResults.map((results, index) => {
+      const renderResults = results.map((results, index) => {
         return (
           <MDBCol md="3" style={{ minHeight: "30rem" }}>
             <UserCard
               key={index}
+              activePage={this.state.activePage}
               login={results.login}
               avatar_url={results.avatar_url}
               html_url={results.html_url}
@@ -147,6 +150,11 @@ class Users extends Component {
           </MDBCol>
         );
       });
+
+      const activeResults = renderResults.slice(
+        indexOfFirstResult,
+        indexOfLastResult
+      );
 
       // Logic for displaying page numbers
       const pageNumbers = [];
@@ -189,7 +197,7 @@ class Users extends Component {
               </h3>
             </MDBRow>
 
-            <MDBRow>{renderResults}</MDBRow>
+            <MDBRow>{activeResults}</MDBRow>
           </div>
 
           <MDBRow>
